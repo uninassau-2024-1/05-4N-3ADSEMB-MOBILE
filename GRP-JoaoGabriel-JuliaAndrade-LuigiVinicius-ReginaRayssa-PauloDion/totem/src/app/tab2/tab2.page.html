@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Atendimento
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Guichê de Atendimento</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item *ngIf="senhasService.inputNovaSenha2">
+        <ion-label>Sua senha:</ion-label>
+        <ion-text>{{ senhasService.inputNovaSenha2 }}</ion-text>
+      </ion-item>
+      <ion-item *ngIf="tempoRestante > 0">
+        Tempo Restante: {{ formatarTempoRestante(senhasService.tempoRestante) }}
+      </ion-item>
+      <ion-button expand="block" (click)="limparGuiche()" *ngIf="senhasService.inputNovaSenha2">
+        Encerrar Atendimento
+      </ion-button>
+      <ion-item *ngIf="!senhasService.inputNovaSenha2">
+        <ion-label>Não há atendimento em curso.</ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
