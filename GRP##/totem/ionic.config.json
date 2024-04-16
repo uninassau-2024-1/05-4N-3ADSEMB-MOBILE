@@ -1,7 +1,0 @@
-{
-  "name": "sistemasenhas",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}
