@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Cadastro de senhas </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card>
+      <ion-card-content>
+        <ion-list>
+          <ion-list-header>Últimas senhas chamadas:</ion-list-header>
+          <ion-item *ngFor="let senha of senhasService.todasSenhas">
+            {{senha}}
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+    <ion-card-content>
+      <ion-button expand="block" (click)="senhasService.novaSenha('SG')"
+        >Senha Geral</ion-button
+      >
+      <ion-button expand="block" (click)="senhasService.novaSenha('SP')"
+        >Senha Prioritária</ion-button
+      >
+      <ion-button expand="block" (click)="senhasService.novaSenha('SE')"
+        >Senha Exame</ion-button
+      >
+    </ion-card-content>
+  </ion-card>
+</ion-content>
