@@ -1,0 +1,58 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Relatórios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Relatórios</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-header>Emissão de relatórios</ion-header>
+    <ion-card-content>
+      <ion-button expand="block" (click)="gerarRelatorio1()">Emitir relatorio diário parcial</ion-button>
+      <ion-button expand="block" (click)="gerarRelatorioDetalhadoComDetalhes()">Emitir relatorio diário
+        detalhado</ion-button>
+      <ion-button expand="block">Emitir relatorio mensal parcial</ion-button>
+      <ion-button expand="block">Emitir relatorio mensal detalhado</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>Relatorio parcial diario</ion-card-header>
+    <ion-card-content id="relatorio1-content">
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+
+    <ion-card-header>Relatorio detalhado diário</ion-card-header>
+    <ion-card-content id="relatorio-detalhado-content">
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>Relatorio 3</ion-card-header>
+    <ion-card-content>
+      <ion-label>Relatorio 3</ion-label>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>Relatorio 4</ion-card-header>
+    <ion-card-content>
+      <ion-label>Relatorio 4</ion-label>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>Relatorio 5</ion-card-header>
+    <ion-card-content>
+      <ion-label>Relatorio 5</ion-label>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
