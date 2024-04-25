@@ -1,0 +1,52 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Fila de Espera
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-text class="title">
+    <h2>Escolha uma senha:</h2>
+  </ion-text>
+  <ion-card name="card" class="card">
+    <ion-button color="danger" (click)="this.SenhaService.adicionarSenhaNaoChamada('SP')">Prioritaria</ion-button>
+    <ion-button color="success" (click)="this.SenhaService.adicionarSenhaNaoChamada('SG')">Geral</ion-button>
+    <ion-button color="medium" (click)="this.SenhaService.adicionarSenhaNaoChamada('SE')">Exames</ion-button>
+  </ion-card>
+
+  <!-- Senha chamada -->
+  <ion-text class="title" *ngIf="SenhaService.senhaRecente">
+    <h2>Senha chamada</h2>
+  </ion-text>
+  <ion-card *ngIf="SenhaService.senhaRecente">
+    <ion-list>
+      <ion-item>
+        <ion-chip>
+          <ion-avatar>
+            <img alt="Avatar" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+          <ion-label>{{ SenhaService.senhaRecente }}</ion-label>
+        </ion-chip>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <!-- Últimas senhas chamadas -->
+  <ion-text class="title" *ngIf="SenhaService.senhasChamadas.length > 0">
+    <h2>Últimas senhas chamadas</h2>
+  </ion-text>
+  <ion-card name="avatar">
+    <ion-list *ngFor="let senha of SenhaService.obterUltimasSenhasChamadas()">
+      <ion-item>
+        <ion-chip>
+          <ion-avatar>
+            <img alt="Avatar" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+          <ion-label>{{ senha }}</ion-label>
+        </ion-chip>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+</ion-content>
