@@ -1,0 +1,62 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Relatorio Diario </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item>
+      <ion-label>Quantidade de Senhas Emitidas</ion-label>
+      <ion-text slot="end"
+        >{{ this.SenhaService.senhasNaoChamadas.length +
+        this.SenhaService.senhasChamadas.length }}</ion-text
+      >
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Senhas Totais Atendidas</ion-label>
+      <ion-item slot="end"
+        >{{this.SenhaService.senhasChamadas.length}}</ion-item
+      >
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Senhas Prioritarias Emitidas</ion-label>
+      <ion-item slot="end"
+        >{{ this.SenhaService.senhasPrioridades.length}}</ion-item
+      >
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Senhas Prioritarias Atendidas</ion-label>
+      <ion-item slot="end"
+        >{{ this.SenhaService.senhasPrioridadesAtendidas.length}}</ion-item
+      >
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Senhas Gerais Emitidas</ion-label>
+      <ion-item slot="end">{{ this.SenhaService.senhasGerais.length}}</ion-item>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Senhas Gerais Atendidas</ion-label>
+      <ion-item slot="end"
+        >{{this.SenhaService.senhasGeraisAtendidas.length}}</ion-item
+      >
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Senhas Exames Emitidas</ion-label>
+      <ion-item slot="end">{{ this.SenhaService.senhasExames.length}}</ion-item>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Senhas para exames atendidas</ion-label>
+      <ion-item slot="end"
+        >{{this.SenhaService.senhasExamesAtendidas.length}}</ion-item
+      >
+    </ion-item>
+  </ion-list>
+</ion-content>
