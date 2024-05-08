@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Auto atendimento</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Auto atendimento</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-card-header>Pedir senha</ion-card-header>
+    <ion-card-content>
+      <!-- adiconar evento (click)="" -->
+      <ion-button expand="block" color="danger" (click)="criarSenhaService.adicionarSenhaSP()">Senha
+        prioritária</ion-button>
+      <ion-button expand="block" color="warning" (click)="criarSenhaService.adicionarSenhaSG()">Senha geral</ion-button>
+      <ion-button expand="block" color="success" (click)="criarSenhaService.adicionarSenhaSE()">Senha para coleta de
+        exames</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

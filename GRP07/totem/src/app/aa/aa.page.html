@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Guichê nº1</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Guichê nº1</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-card>
+    <ion-card-header>Histórico de senhas atendidas</ion-card-header>
+    <ion-card-content>
+      <ion-chip expand="block" *ngFor="let atendimento of ultimosAtendimentos">
+        <ion-label>numero: {{atendimento.numero}} - prioridade:{{atendimento.tipo}} </ion-label>
+      </ion-chip>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>Area do Atendente</ion-card-header>
+    <ion-card-content>
+      <!--adicionar evento depois (click)="" -->
+      <ion-button expand="block" color="medium" (click)="chamarProximaSenha()">Chamar próximo</ion-button>
+      <ion-button expand="block" color="success" (click)=atenderChamadoAtual()>Atender chamado</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
