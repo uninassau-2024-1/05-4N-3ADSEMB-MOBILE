@@ -1,0 +1,26 @@
+ion-content {
+    --background: #f8f9fa;
+}
+
+ion-item.custom-item {
+    --background: #e0f7fa;
+    --color: #606060;
+    --padding-start: 20px;
+    --padding-end: 20px;
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+}
+
+ion-item ion-chip {
+    background: none;
+    --color: #000000;
+    --ion-color-base: transparent;
+}
+
+ion-item.custom-item ion-label {
+    --color: #000000;
+}
+
+ion-list.custom-list {
+    --background: #e0f7fa;
+}
