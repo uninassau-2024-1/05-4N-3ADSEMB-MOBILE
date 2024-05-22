@@ -1,0 +1,29 @@
+<!-- tab3.page.html -->
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Pokédex
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let pokemon of pokemons">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{ pokemon.name }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <img [src]="pokemon.sprites.other['official-artwork'].front_default" alt="{{ pokemon.name }}">
+            <p style="color: green;">Vitórias: {{ pokemon.victories }}</p>
+            <p style="color: red;">Derrotas: {{ pokemon.defeats }}</p>
+            <p style="color: yellow;">Empates: {{ pokemon.draws }}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
