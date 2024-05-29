@@ -24,3 +24,29 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+
+.btn-azul {
+    --background: #007BFF;
+    --background-activated: #0056b3;
+    --background-focused: #0056b3;
+    --background-hover: #0056b3;
+    color: white;
+  }
+  
+  .btn-verde {
+    --background: #28a745;
+    --background-activated: #218838;
+    --background-focused: #218838;
+    --background-hover: #218838;
+    color: white;
+  }
+  
+  .btn-amarelo {
+    --background: #ffc107;
+    --background-activated: #e0a800;
+    --background-focused: #e0a800;
+    --background-hover: #e0a800;
+    color: black;
+  }
+  
