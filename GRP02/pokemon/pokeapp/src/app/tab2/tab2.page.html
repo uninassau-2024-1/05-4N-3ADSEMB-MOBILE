@@ -1,0 +1,48 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Tab 2
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Tab 2</ion-title>
+    </ion-toolbar>
+  </ion-header>
+<ion-grid>
+  <ion-row>
+    <ion-col>
+  <ion-card>
+    <ion-item class="ion-text-center"><ion-header>SEU POKEMOM</ion-header></ion-item>
+    <ion-item class="ion-text-center"><ion-header>{{this.seuPokemon[i].nome.toUpperCase()}}</ion-header></ion-item>
+    <ion-item><ion-img src={{this.seuPokemon[i].img}}></ion-img></ion-item>
+    <ion-item>Habildiades:{{this.seuPokemon[i].nHabilidades}}</ion-item>
+    <ion-item>Peso:{{this.seuPokemon[i].peso}}</ion-item>
+    <ion-item>Altura:{{this.seuPokemon[i].altura}}</ion-item>
+    <ion-item class="ion-text-center"><ion-text color={{this.colorSeuPOkemon}}>{{this.seuPokemonResult}}</ion-text></ion-item>
+  </ion-card>
+</ion-col>
+<ion-col>
+<h1 class="margin-ajust">VS</h1>
+</ion-col>
+<ion-col>
+  <ion-card>
+    <ion-item class="ion-text-center"><ion-header>POKEMOM INIMIGO</ion-header></ion-item>
+    <ion-item class="ion-text-center"><ion-header>{{this.pokemonInimigo.nome.toUpperCase()}}</ion-header></ion-item>
+    <ion-item><ion-img src={{this.pokemonInimigo.img}}></ion-img></ion-item>
+    <ion-item>Habildiades:{{this.pokemonInimigo.nHabilidades}}</ion-item>
+    <ion-item>Peso:{{this.pokemonInimigo.peso}}</ion-item>
+    <ion-item>Altura:{{this.pokemonInimigo.altura}}</ion-item>
+ 
+    
+  </ion-card>
+</ion-col>
+
+
+</ion-row>
+</ion-grid>
+<ion-button expand="block" (click)='batalhar()' >BATALHAR</ion-button>
+</ion-content>

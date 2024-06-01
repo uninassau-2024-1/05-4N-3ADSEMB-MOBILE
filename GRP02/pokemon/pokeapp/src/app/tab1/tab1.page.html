@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Tab 1
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">POKEMON</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-label>digite seu cep</ion-label>
+    <ion-input [(ngModel)]="buscarCep"></ion-input>
+    <ion-header>{{this.cepShow}}</ion-header>
+  </ion-card>
+  <ion-button expand="block" (click)="getCepViaApi()"> <ion-icon name="search"></ion-icon> BUSCAR POKEMON</ion-button>
+  <ion-card>
+    <ion-item class="ion-text-center"><ion-header>{{this.pokemonAtual.nome}}</ion-header></ion-item>
+    <ion-item><ion-img src={{this.pokemonAtual.img}}></ion-img></ion-item>
+    <ion-item>Habildiades:{{this.pokemonAtual.nHabilidades}}</ion-item>
+    <ion-item>Peso:{{this.pokemonAtual.peso}}</ion-item>
+    <ion-item>Altura:{{this.pokemonAtual.altura}}</ion-item>
+  </ion-card>
+  
+</ion-content>
