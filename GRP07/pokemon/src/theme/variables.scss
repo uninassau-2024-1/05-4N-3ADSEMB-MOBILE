@@ -1,0 +1,27 @@
+// For information on how to create your own theme, please see:
+// http://ionicframework.com/docs/theming/
+
+.victory {
+    border: 2px solid green;
+  }
+  
+  .defeat {
+    border: 2px solid red;
+  }
+
+  .tie{
+    border: 2px solid gray;
+  }
+  
+  .victory-text {
+    color: green;
+  }
+  
+  .defeat-text {
+    color: red;
+  }
+
+  .tie-text{
+    border: gray;
+  }
+  
