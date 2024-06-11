@@ -1,85 +1,38 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Painel de atendimento
+      Atendimento
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-<ion-card class="card">
-  <ion-button class="custom-blue">Chamar Senha</ion-button>
-</ion-card>
-
-
- 
-<ion-text class="title2" >
-  <h2>Senha em exibição: </h2>
-</ion-text>
-<ion-card>
-  <ion-list>
-    <ion-item class="custom-item">
-      <ion-chip>
-       <ion-avatar>
-         <img alt="Avatar 1" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-       </ion-avatar>
-       <ion-label>240415SG04</ion-label>
-        </ion-chip>
-    </ion-item>
-  </ion-list>
-</ion-card>
-
-<ion-text class="title2" >
-  <h2>Ultimas senhas chamadas</h2>
-</ion-text>
-
-<ion-card name="avatar">
-<ion-list>
-  
-  <ion-item class="custom-item">
-   <ion-chip>
-    <ion-avatar>
-      <img alt="Avatar 1" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-    </ion-avatar>
-    <ion-label>240415SG03</ion-label>
-     </ion-chip>
- </ion-item>
-
- <ion-item class="custom-item">
-  <ion-chip>
-    <ion-avatar>
-      <img alt="Avatar 2" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-    </ion-avatar>
-    <ion-label>240415SE02</ion-label>
-  </ion-chip>
-</ion-item>
-
-<ion-item class="custom-item">
-  <ion-chip>
-    <ion-avatar>
-      <img alt="Avatar 3" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-    </ion-avatar>
-    <ion-label>240415SP03</ion-label>
-  </ion-chip>
-</ion-item>
-
-<ion-item class="custom-item">
-  <ion-chip>
-    <ion-avatar>
-      <img alt="Avatar 5" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-    </ion-avatar>
-    <ion-label>240415SG02</ion-label>
-  </ion-chip>
-</ion-item>
-
-<ion-item class="custom-item">
-  <ion-chip>
-    <ion-avatar>
-      <img alt="Avatar 6" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-    </ion-avatar>
-    <ion-label>240415SE01</ion-label>
-  </ion-chip>
-</ion-item>
-</ion-list>
-</ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Guichê de Atendimento</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item *ngIf="senhasService.inputNovaSenha2">
+        <ion-label>Sua senha:</ion-label>
+        <ion-text>{{ senhasService.inputNovaSenha2 }}</ion-text>
+      </ion-item>
+      <ion-item *ngIf="tempoRestante > 0">
+        Tempo Restante: {{ formatarTempoRestante(senhasService.tempoRestante) }}
+      </ion-item>
+      <ion-item>
+        <ion-label>Fichas Atendidas:</ion-label>
+        <ion-list>
+          <ion-item *ngFor="let senha of senhasService.senhasArray['SG'].concat(senhasService.senhasArray['SP'], senhasService.senhasArray['SE'])">
+            {{senha}} - Atendida: {{senhasService.fichaAtendida(senha) ? 'Sim' : 'Não'}}
+          </ion-item>
+        </ion-list>
+      </ion-item>
+      <ion-button expand="block" (click)="limparGuiche()" *ngIf="senhasService.inputNovaSenha2">
+        Encerrar Atendimento
+      </ion-button>
+      <ion-item *ngIf="!senhasService.inputNovaSenha2">
+        <ion-label>Não há atendimento em curso.</ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

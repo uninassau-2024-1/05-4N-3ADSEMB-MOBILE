@@ -1,165 +1,135 @@
 import { Injectable } from '@angular/core';
 
+
+// Alunos(a) Contribuintes: João Gabriel Ferreira Mendes | Scrum Master
+// Julia de Andrade Leal
+// Luigi Vinicius Mendes de Albuquerque
+// Regina Rayssa Cordoville
+// Paulo Dion Soares
+
+
+
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class SenhasService {
+
   public senhasGeral: number = 0;
   public senhasPrior: number = 0;
   public senhasExame: number = 0;
   public senhasTotal: number = 0;
-  public tempoExpediente: number = 60;
-  public inputNovaSenha: string = '';
-  public senhasArray: any = {
-    SG: [],
-    SP: [],
-    SE: [],
-  };
-  public vetorSenhas: string[] = [];
-  public vetorSenhasChamadas: string[] = [];
-  public senhasAtendidasPrioridade=0;
+  public inputNovaSenha2: string = '';
+  public senhasArray: { [key: string]: string[] } = { 'SG': [], 'SP': [], 'SE': [] }; 
+  public tempoRestante: number = 0;
+  public senhasDiarias: { data: string, total: number, prioritarias: number }[] = [];
+  public senhasMensais: { data: string, total: number, prioritarias: number }[] = [];
 
-  somaGeral() {
-    this.senhasGeral++;
-    this.senhasTotal++;
-  }
-  somaPrior() {
-    this.senhasPrior++;
-    this.senhasTotal++;
-  }
-  somaExame() {
-    this.senhasExame++;
-    this.senhasTotal++;
-  }
+  somaGeral() { this.senhasGeral++; this.senhasTotal++; }
+  somaPrior() { this.senhasPrior++; this.senhasTotal++; }
+  somaExame() { this.senhasExame++; this.senhasTotal++; }
 
   novaSenha(tipoSenha: string = '') {
-    if (tipoSenha == 'SG') {
-      this.somaGeral();
-      this.inputNovaSenha =
+    let novaSenha: string;
+    if (tipoSenha === 'SG' || tipoSenha === 'SP' || tipoSenha === 'SE') {
+      if (tipoSenha == 'SG') {
+        this.somaGeral();
+      } else if (tipoSenha == 'SP') {
+        this.somaPrior();
+      } else if (tipoSenha == 'SE') {
+        this.somaExame();
+      }
+      novaSenha =
         new Date().getFullYear().toString().substring(2, 4) +
-        (new Date().getMonth() + 1).toString().padStart(2, '0') +
+        '/' +
+        new Date().getMonth().toString().padStart(2, '0') +
+        '/' +
         new Date().getDate().toString().padStart(2, '0') +
         '-' +
         tipoSenha +
-        (this.senhasArray['SG'].length + 1).toString().padStart(2, '0');
-      this.senhasArray.SG.push(this.inputNovaSenha);
-      this.vetorSenhas.push(this.inputNovaSenha);
-
-    } else if (tipoSenha == 'SP') {
-      this.somaPrior();
-      this.inputNovaSenha =
-        new Date().getFullYear().toString().substring(2, 4) +
-        (new Date().getMonth() + 1).toString().padStart(2, '0') +
-        new Date().getDate().toString().padStart(2, '0') +
-        '-' +
-        tipoSenha +
-        (this.senhasArray['SP'].length + 1).toString().padStart(2, '0');
-      this.senhasArray.SP.push(this.inputNovaSenha);
-      this.vetorSenhas.push(this.inputNovaSenha);
-
-    } else if (tipoSenha == 'SE') {
-      this.somaExame();
-      this.inputNovaSenha =
-        new Date().getFullYear().toString().substring(2, 4) +
-        (new Date().getMonth() + 1).toString().padStart(2, '0') +
-        new Date().getDate().toString().padStart(2, '0') +
-        '-' +
-        tipoSenha +
-        (this.senhasArray['SE'].length + 1).toString().padStart(2, '0');
-      this.senhasArray.SE.push(this.inputNovaSenha);
-      this.vetorSenhas.push(this.inputNovaSenha);
-
+        (this.senhasArray[tipoSenha].length + 1).toString().padStart(2, '0');
+      this.senhasArray[tipoSenha].push(novaSenha);
+    } else {
+      return;
     }
 
-    console.log(this.senhasArray);
-  }
-
-  public senhasAtendidas = 0;
-  public naoAtenda = 0;
-
-  atenderSenha() {
-    if (this.tempoExpediente <= 0) {
-      this.descartarSenhas();
-      this.tempoExpediente=600;
-      return
-    }else{
-    if (this.naoAtenda == 0 && this.senhasArray.SP.length > 0) {
-
-      const senhaAtendida = this.senhasArray.SP.shift();
-      const index = this.vetorSenhas.indexOf(senhaAtendida);
-      if (index !== -1) {
-        this.vetorSenhas.splice(index, 1);
+    const dataAtual = new Date().toLocaleDateString();
+    const hoje = this.senhasDiarias.find(item => item.data === dataAtual);
+    if (hoje) {
+      hoje.total++;
+      if (tipoSenha === 'SP') {
+        hoje.prioritarias++;
       }
-
-      this.tempoExpediente -= 15 + Math.floor(Math.random() * 11) + -5;
-      this.senhasAtendidasPrioridade++
-      this.senhasAtendidas++;
-      this.naoAtenda = 1;
-      this.consoleLogs();
-      return
-
-    } else if (this.senhasArray.SE.length > 0) {
-
-      const senhaAtendida = this.senhasArray.SE.shift();
-      const index = this.vetorSenhas.indexOf(senhaAtendida);
-      
-      
-      if (index !== -1) {
-        this.vetorSenhas.splice(index, 1);
-      }
-
-      this.tempoExpediente -= 1;
-      this.senhasAtendidas++;
-      this.naoAtenda = 0;
-      this.consoleLogs();
-      return
-    } else if (this.senhasArray.SG.length > 0) {
-
-      const senhaAtendida = this.senhasArray.SG.shift();
-      const index = this.vetorSenhas.indexOf(senhaAtendida);
-      if (index !== -1) {
-        this.vetorSenhas.splice(index, 1);
-      }
-      
-        this.tempoExpediente -= 5 + Math.floor(Math.random() * 7) - 3;
-        this.senhasAtendidas++;
-        this.naoAtenda = 0;
-        this.consoleLogs();
-        return
-      }
-      
-        
+    } else {
+      this.senhasDiarias.push({ data: dataAtual, total: 1, prioritarias: tipoSenha === 'SP' ? 1 : 0 });
+    }
     
-    console.log(this.naoAtenda);
-    console.log(this.tempoExpediente);
-    console.log(this.senhasArray);
+    if (!this.inputNovaSenha2) {
+      this.atenderSenha();
+    }
+  }
+  
+  atenderSenha() {
 
-  }}
+    if (!this.senhasArray['SP'].length && !this.senhasArray['SE'].length && !this.senhasArray['SG'].length) {
+      return;
+    }
 
-  descartarSenhas() {
-    this.senhasArray.SG = [];
-    this.senhasArray.SP = [];
-    this.senhasArray.SE = [];
-    this.senhasGeral = 0;
-    this.senhasPrior = 0;
-    this.senhasExame = 0;
-    this.senhasTotal = 0;
-    this.vetorSenhas.length=0;
 
-    alert('EXPEDIENTE ENCERRADO');
+    let senha: string | undefined;
+    let tipoSenha: string | null = null;
+  
+    if (this.senhasArray['SP'].length > 0) {
+      tipoSenha = 'SP';
+    } else if (this.senhasArray['SE'].length > 0) {
+      tipoSenha = 'SE';
+    } else if (this.senhasArray['SG'].length > 0) {
+      tipoSenha = 'SG';
+    }
+  
+    if (tipoSenha) {
+      senha = this.senhasArray[tipoSenha].shift();
+    }
+ 
+    if (senha !== undefined) {
+      this.inputNovaSenha2 = senha;
+   
+
+    const tempoLimite = tipoSenha === 'SP' ? 15 : 5; 
+    this.tempoRestante = tempoLimite * 60;
+
+    this.contadorRegressivo();
+  }
+}
+
+  contadorRegressivo() {
+    setInterval(() => {
+      if (this.tempoRestante > 0) {
+        this.tempoRestante--;
+      }
+    }, 1000); 
   }
 
-  consoleLogs() {
-    console.log(this.naoAtenda);
-    console.log(this.tempoExpediente);
-    console.log(this.senhasArray);
+  limparGuiche() {
+    this.inputNovaSenha2 = '';
+    this.tempoRestante = 0;
+    if (this.senhasArray['SP'].length || this.senhasArray['SE'].length || this.senhasArray['SG'].length) {
+      this.atenderSenha();
+
+      const dataAtual = new Date().toLocaleDateString();
+      const hoje = this.senhasDiarias.find(item => item.data === dataAtual);
+      if (hoje) {
+        hoje.total--;
+        if (this.inputNovaSenha2.startsWith('SP')) {
+          hoje.prioritarias--;
+        }
+      }
+      
+    }
   }
 
-  get todasSenhas() {
-    return [
-      ...this.senhasArray.SG,
-      ...this.senhasArray.SP,
-      ...this.senhasArray.SE,
-    ];
-  }
+  fichaAtendida(senha: string): boolean {
+    return this.inputNovaSenha2 === senha;
+  }
+  
+  constructor() { }
 }
