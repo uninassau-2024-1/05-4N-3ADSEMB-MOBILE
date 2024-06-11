@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Tab 3
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">POKEDEX</ion-title>
+    </ion-toolbar>
+  </ion-header>
+<ion-grid>
+  <ion-row>
+    <ion-col *ngFor="let pokes of pokemonAtual" size="3" >
+      <ion-card>
+        <ion-header class="ion-text-center" >{{pokes.nome}}</ion-header>
+        <ion-img src={{pokes.img}}></ion-img>
+        <ion-item><ion-text color="success">Votórias:{{pokes.vit}}</ion-text></ion-item>
+        <ion-item><ion-text color="warning">Empates:{{pokes.emp}}</ion-text></ion-item>
+        <ion-item><ion-text color="danger">Derrotas:{{pokes.der}}</ion-text></ion-item>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+  
+</ion-content>
