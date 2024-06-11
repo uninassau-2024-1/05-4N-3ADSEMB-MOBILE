@@ -1,0 +1,72 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Caçar Pokemons</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Buscar</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+   
+    <ion-card-header>
+      
+      <ion-input
+        [(ngModel)]="buscarPokemonArea"
+        [counter]="true"
+        fill="solid"
+        helperText="Área para buscar por Pokemon"
+        label-placement="floating"
+        label="CEP"
+        maxlength="8"
+        placeholder="exemplo: 22555888"
+        type="text"
+      ></ion-input>
+      <div *ngIf="showErrorMessage" class="error-message">
+        Por favor, digite um CEP válido.
+      </div>
+      <ion-button expand="block" fill="solid" (click)="buscarPokemon()">
+        Buscar por Pokemon
+        <ion-icon name="search" slot="end"></ion-icon>
+      </ion-button>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card *ngIf="areaBusca.logradouro && areaBusca.bairro && areaBusca.localidade && areaBusca.uf">
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          {{ areaBusca.logradouro + areaBusca.bairro + areaBusca.localidade + areaBusca.uf }}
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="showResult">
+    <ion-card-header>
+      <ion-card-title>{{ pokemon?.name | uppercase }}</ion-card-title>
+      <ion-img [src]="pokemon?.sprites.front_default"></ion-img>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let ability of pokemon?.abilities">
+          <ion-label>Ability: {{ ability.ability.name }}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Height: {{ pokemon?.height }}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Weight: {{ pokemon?.weight }}</ion-label>
+        </ion-item>
+      </ion-list>
+      <ion-item>
+        <ion-label *ngIf="captured">You have captured the Pokémon!</ion-label>
+        <ion-label *ngIf="!captured">The Pokémon escaped!</ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

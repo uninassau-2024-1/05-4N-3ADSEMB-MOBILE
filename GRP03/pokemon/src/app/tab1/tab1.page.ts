@@ -1,0 +1,68 @@
+import { Component } from '@angular/core';
+import { ViaCEPService } from './../services/http-via-cep.service';
+import { PokeAPIService } from './../services/http-poke-api.service';
+import { PokemonDataService } from '../services/pokemon-data-service.service';
+
+
+@Component({
+  selector: 'app-tab1',
+  templateUrl: 'tab1.page.html',
+  styleUrls: ['tab1.page.scss']
+})
+export class Tab1Page {
+  buscarPokemonArea: string = '';
+  areaBusca: any = {
+    bairro: '',
+    localidade: '',
+    logradouro: '',
+    uf: ''
+  };
+  pokemon: any;
+  showResult: boolean = false;
+  captured: boolean = false;
+  showErrorMessage: boolean = false;
+
+  constructor(
+    private pokeAPIService: PokeAPIService,
+    private viaCEPService: ViaCEPService,
+    private pokemonDataService: PokemonDataService
+  ) {}
+
+  buscarPokemon() {
+
+    if (!this.buscarPokemonArea) {
+      this.showErrorMessage = true; // Se o campo estiver vazio, exibe a mensagem de erro
+      setTimeout(() => {
+        this.showErrorMessage = false;
+      }, 2000);
+      return; // Retorna para evitar a execução da lógica de busca de Pokemon
+    }
+
+
+    this.viaCEPService.getViaCEPService(this.buscarPokemonArea).subscribe((value) => {
+      this.areaBusca.logradouro = JSON.parse(JSON.stringify(value))['logradouro'];
+      this.areaBusca.bairro = ', ' + JSON.parse(JSON.stringify(value))['bairro'];
+      this.areaBusca.localidade = ' - ' + JSON.parse(JSON.stringify(value))['localidade'];
+      this.areaBusca.uf = ' - ' + JSON.parse(JSON.stringify(value))['uf'];
+    });
+
+    this.pokeAPIService.getRandomPokemon().subscribe((data) => {
+      this.pokemon = data;
+      this.showResult = true;
+      if (this.checkCaptureChance()) {
+        this.capturePokemon();
+      }
+    });
+  }
+
+  checkCaptureChance(): boolean {
+    return Math.random() < 0.5; // 50% de chance de retorno verdadeiro
+  }
+
+  capturePokemon() {
+    this.captured = true;
+    this.pokemonDataService.capturePokemon(this.pokemon);
+  }
+}
+
+
