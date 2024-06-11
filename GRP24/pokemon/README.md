@@ -1,3 +1,1 @@
-# Alunos
-
-* Nome - Matrícula
+# GRP24
