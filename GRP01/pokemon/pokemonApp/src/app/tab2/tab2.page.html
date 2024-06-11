@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="header-title" >
+      Batalhar
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card *ngIf="pokemonTab2">
+    <ion-card-header>
+      <ion-card-title [style.color]="comparisonColor">
+        {{ pokemonTab2.name | uppercase }} - {{ comparisonResult }}
+      </ion-card-title>
+      <ion-img
+        [src]="pokemonTab2.sprites.front_default"
+        alt="{{ pokemonTab2.name }}"
+        class="pokemon">
+      </ion-img>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>Habilidades: {{ pokemonTab2.abilities.length }}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Altura: {{ pokemonTab2.height }}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Peso: {{ pokemonTab2.weight }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button (click) = "addPhotoToGallery()">
+      <ion-img src="https://cdn-icons-png.flaticon.com/128/188/188965.png" class="custom-img"></ion-img>
+    </ion-fab-button>
+  </ion-fab>
+  <app-explore-container name="Tab 2 page"></app-explore-container>
+</ion-content>
